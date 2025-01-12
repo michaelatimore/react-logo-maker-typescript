@@ -6,7 +6,7 @@ function App() {
   const [subBrand, setSubBrand] = useState("");
   const [logoSize, setLogoSize] = useState(100);
   const [logoColor, setLogoColor] = useState("#000000");
-  const [logoShape, setLogoShape] = useState("circle");
+  const [logoShape, setLogoShape] = useState("");
   const [logoText, setLogoText] = useState("");
   const [textColor, setTextColor] = useState("#000000");
   const [textSize, setTextSize] = useState(16);
@@ -82,6 +82,7 @@ function App() {
           onChange={(e) => setLogoSize(Number(e.target.value))}
           placeholder="Logo Size"
         />
+
         <input
           type="color"
           value={logoColor}
@@ -94,6 +95,7 @@ function App() {
           <option value="circle">Circle</option>
           <option value="square">Square</option>
           <option value="triangle">Triangle</option>
+          placeholder="Logo Shape"
         </select>
         <input
           type="text"
