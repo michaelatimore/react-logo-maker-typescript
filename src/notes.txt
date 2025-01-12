@@ -1,0 +1,4 @@
+App lives inside main.tsx
+jsx fragment
+hooks allow you to manipulate use state
+props are always oblgucts
