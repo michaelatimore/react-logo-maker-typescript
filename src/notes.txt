@@ -2,3 +2,240 @@ App lives inside main.tsx
 jsx fragment
 hooks allow you to manipulate use state
 props are always oblgucts
+
+import { useState } from "react";
+import { Header } from "./components/Header";
+import { StringInput, NumberInput } from "./components/Input";
+
+function App() {
+  const [brand, setBrand] = useState("");
+  const [subBrand, setSubBrand] = useState("");
+  const [logoSize, setLogoSize] = useState(100);
+  const [logoColor, setLogoColor] = useState("#000000");
+  const [logoShape, setLogoShape] = useState("");
+  const [logoText, setLogoText] = useState("");
+  const [textColor, setTextColor] = useState("#000000");
+  const [textSize, setTextSize] = useState(16);
+  const [fontStyle, setFontStyle] = useState("Arial");
+  const [backgroundColor, setBackgroundColor] = useState("#FFFFFF");
+  const [borderColor, setBorderColor] = useState("#000000");
+  const [borderSize, setBorderSize] = useState(1);
+  const [shadowColor, setShadowColor] = useState("#000000");
+  const [shadowSize, setShadowSize] = useState(0);
+  const [rotation, setRotation] = useState(0);
+  const [transparency, setTransparency] = useState(1);
+  const [effect, setEffect] = useState("none");
+  const [uploadedImage, setUploadedImage] = useState<File | null>(null);
+  const [imageFilter, setImageFilter] = useState("none");
+  const [animation, setAnimation] = useState("none");
+  const [logoMargin, setLogoMargin] = useState(0);
+  const [logoPadding, setLogoPadding] = useState(0);
+  const [logoPosition, setLogoPosition] = useState({ x: 0, y: 0 });
+
+  function handleSubmit() {
+    const data = {
+      brand,
+      subBrand,
+      logoSize,
+      logoColor,
+      logoShape,
+      logoText,
+      textColor,
+      textSize,
+      fontStyle,
+      backgroundColor,
+      borderColor,
+      borderSize,
+      shadowColor,
+      shadowSize,
+      logoPosition,
+      rotation,
+      transparency,
+      effect,
+      uploadedImage: uploadedImage?.name,
+      imageFilter,
+      animation,
+      logoMargin,
+      logoPadding,
+    };
+    console.log("Logo Data: ", data);
+  }
+
+  return (
+    <div className="min-w96 flex min-h-screen flex-col gap-4 bg-slate-600 text-center">
+      <Header />
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
+        <StringInput label="Brand" value={brand} setValue={setBrand} />
+        <StringInput label="Sub Brand" value={subBrand} setValue={setSubBrand} />
+        <NumberInput label="Logo Size" value={logoSize} setValue={setLogoSize} />
+        <StringInput label="Logo Color" value={logoColor} setValue={setLogoColor} />
+        <StringInput label="Logo Shape" value={logoShape} setValue={setLogoShape} />
+        <StringInput label="Logo Text" value={logoText} setValue={setLogoText} />
+        <StringInput label="Text Color" value={textColor} setValue={setTextColor} />
+        <NumberInput label="Text Size" value={textSize} setValue={setTextSize} />
+        <StringInput label="Font Style" value={fontStyle} setValue={setFontStyle} />
+        <StringInput
+          label="Background Color"
+          value={backgroundColor}
+          setValue={setBackgroundColor}
+        />
+        <StringInput label="Border Color" value={borderColor} setValue={setBorderColor} />
+        <NumberInput label="Border Size" value={borderSize} setValue={setBorderSize} />
+        <StringInput label="Shadow Color" value={shadowColor} setValue={setShadowColor} />
+        <NumberInput label="Shadow Size" value={shadowSize} setValue={setShadowSize} />
+        <NumberInput label="Rotation" value={rotation} setValue={setRotation} />
+        <NumberInput label="Transparency" value={transparency} setValue={setTransparency} />
+        <div>
+          <label>Effect:</label>
+          <select value={effect} onChange={(e) => setEffect(e.target.value)}>
+            <option value="none">None</option>
+            <option value="gradient">Gradient</option>
+            <option value="pattern">Pattern</option>
+          </select>
+        </div>
+        <div>
+          <label>Upload Image:</label>
+          <input
+            type="file"
+            onChange={(e) => setUploadedImage(e.target.files?.[0] || null)}
+          />
+        </div>
+        <div>
+          <label>Image Filter:</label>
+          <select value={imageFilter} onChange={(e) => setImageFilter(e.target.value)}>
+            <option value="none">None</option>
+            <option value="grayscale">Grayscale</option>
+            <option value="sepia">Sepia</option>
+          </select>
+        </div>
+        <div>
+          <label>Animation:</label>
+          <select value={animation} onChange={(e) => setAnimation(e.target.value)}>
+            <option value="none">None</option>
+            <option value="rotate">Rotate</option>
+            <option value="pulse">Pulse</option>
+          </select>
+        </div>
+        <NumberInput label="Logo Margin" value={logoMargin} setValue={setLogoMargin} />
+        <NumberInput label="Logo Padding" value={logoPadding} setValue={setLogoPadding} />
+        <NumberInput
+          label="Logo Position X"
+          value={logoPosition.x}
+          setValue={(x) => setLogoPosition({ ...logoPosition, x })}
+        />
+        <NumberInput
+          label="Logo Position Y"
+          value={logoPosition.y}
+          setValue={(y) => setLogoPosition({ ...logoPosition, y })}
+        />
+        <button type="submit">Create Logo</button>
+      </form>
+    </div>
+  );
+}
+
+export default App;
+
+
+
+/*
+Original code:
+<label>Rotation:</label>
+        <input
+          id="rotation"
+          type="number"
+          value={rotation}
+          onChange={(e) => setRotation(Number(e.target.value))}
+        />
+
+        <label>Transparency:</label>
+        <input
+          id="transparency"
+          type="range"
+          min="0"
+          max="1"
+          step="0.1"
+          value={transparency}
+          onChange={(e) => setTransparency(Number(e.target.value))}
+        />
+
+        <label>Effect:</label>
+        <select
+          id="effect"
+          value={effect}
+          onChange={(e) => setEffect(e.target.value)}
+        >
+          <option value="none">None</option>
+          <option value="gradient">Gradient</option>
+          <option value="pattern">Pattern</option>
+        </select>
+
+        <label>Upload Image:</label>
+        <input
+          id="uploadedImage"
+          type="file"
+          onChange={(e) => setUploadedImage(e.target.files?.[0] || null)}
+        />
+
+        <label>Image Filter:</label>
+        <select
+          id="imageFilter"
+          value={imageFilter}
+          onChange={(e) => setImageFilter(e.target.value)}
+        >
+          <option value="none">None</option>
+          <option value="grayscale">Grayscale</option>
+          <option value="sepia">Sepia</option>
+        </select>
+
+        <label>Animation:</label>
+        <select
+          id="animation"
+          value={animation}
+          onChange={(e) => setAnimation(e.target.value)}
+        >
+          <option value="none">None</option>
+          <option value="rotate">Rotate</option>
+          <option value="pulse">Pulse</option>
+        </select>
+
+        <label>Logo Margin:</label>
+        <input
+          id="logoMargin"
+          type="number"
+          value={logoMargin}
+          onChange={(e) => setLogoMargin(Number(e.target.value))}
+        />
+
+        <label>Logo Padding:</label>
+        <input
+          id="logoPadding"
+          type="number"
+          value={logoPadding}
+          onChange={(e) => setLogoPadding(Number(e.target.value))}
+        />
+        <label>Logo Position X:</label>
+        <input
+          id="logoPositionX"
+          type="number"
+          value={logoPosition.x}
+          onChange={(e) =>
+            setLogoPosition({ ...logoPosition, x: Number(e.target.value) })
+          }
+        />
+
+        <label>Logo Position Y:</label>
+        <input
+          id="logoPositionY"
+          type="number"
+          value={logoPosition.y}
+          onChange={(e) =>
+            setLogoPosition({ ...logoPosition, y: Number(e.target.value) })
+          }
+        />
+*/
